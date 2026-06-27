@@ -10,8 +10,9 @@ export const SocketProvider = ({ children }) => {
   const { showToast } = useAuth();
 
   useEffect(() => {
-    // Establish connection to backend on port 5000
-    const newSocket = io('http://localhost:5000', {
+    // Establish connection to backend
+    const socketUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+    const newSocket = io(socketUrl, {
       withCredentials: true,
       autoConnect: true
     });
