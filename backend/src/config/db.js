@@ -216,6 +216,16 @@ const initDatabase = async () => {
       console.log('Seeded default staff user: staff@cakesandcrunches.com');
     }
 
+    const gnanasaibExists = await dbHelper.get('SELECT * FROM users WHERE email = ?', ['gnanasaib2008@gmail.com']);
+    if (!gnanasaibExists) {
+      const hashedPass = await bcrypt.hash('Gnanasai@2008', 10);
+      await dbHelper.run(
+        'INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)',
+        ['Gnana Sai', 'gnanasaib2008@gmail.com', hashedPass, 'admin']
+      );
+      console.log('Seeded user: gnanasaib2008@gmail.com');
+    }
+
     // Seed allergies
     const allergyCount = await dbHelper.get('SELECT COUNT(*) as count FROM allergies');
     if (allergyCount.count === 0) {
