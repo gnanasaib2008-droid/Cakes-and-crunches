@@ -1,0 +1,124 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 224 71.4% 4.1%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 224 71.4% 4.1%;
+
+    --primary: 250 84% 54%;
+    --primary-foreground: 210 40% 98%;
+    --primary-hover: 250 84% 48%;
+
+    --border: 214.3 32% 91%;
+
+    --sidebar: 220 14% 96%;
+    --sidebar-foreground: 215.4 16.3% 44%;
+    --sidebar-active: 220.9 39.3% 11%;
+
+    --success: 142 72% 29%;
+    --warning: 38 92% 50%;
+    --danger: 347 77% 50%;
+  }
+
+  .dark {
+    --background: 224 71.4% 4.1%;
+    --foreground: 210 40% 98%;
+
+    --card: 224 71.4% 7%;
+    --card-foreground: 210 40% 98%;
+
+    --primary: 250 90% 62%;
+    --primary-foreground: 210 40% 98%;
+    --primary-hover: 250 90% 70%;
+
+    --border: 217.2 32.6% 17.5%;
+
+    --sidebar: 224 71.4% 3%;
+    --sidebar-foreground: 215 20.2% 65.1%;
+    --sidebar-active: 210 40% 98%;
+
+    --success: 142 68% 45%;
+    --warning: 38 90% 55%;
+    --danger: 347 77% 58%;
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+  }
+
+  .dark .glass {
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .shadow-glow-rose {
+    box-shadow: 0 4px 20px 0 rgba(244, 63, 94, 0.12), 0 2px 8px -1px rgba(244, 63, 94, 0.08);
+  }
+
+  .shadow-glow-violet {
+    box-shadow: 0 4px 20px 0 rgba(139, 92, 246, 0.12), 0 2px 8px -1px rgba(139, 92, 246, 0.08);
+  }
+
+  .shadow-glow-amber {
+    box-shadow: 0 4px 20px 0 rgba(245, 158, 11, 0.12), 0 2px 8px -1px rgba(245, 158, 11, 0.08);
+  }
+
+  .shadow-glow-emerald {
+    box-shadow: 0 4px 20px 0 rgba(16, 185, 129, 0.12), 0 2px 8px -1px rgba(16, 185, 129, 0.08);
+  }
+}
+
+/* Premium Scrollbars — Webkit (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Firefox Scrollbar Fallback */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+.dark * {
+  scrollbar-color: #334155 transparent;
+}
+
+/* Confirmation Modal Overlay */
+.confirm-modal-overlay {
+  animation: fadeIn 0.15s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
