@@ -12,9 +12,17 @@ const aiRoutes = require('./routes/ai');
 
 const app = express();
 
+// Clean the FRONTEND_URL to make sure it's a valid origin (no trailing slash or path)
+let frontendOrigin = process.env.FRONTEND_URL || 'http://localhost:3000';
+try {
+  frontendOrigin = new URL(frontendOrigin).origin;
+} catch (err) {
+  // Use as-is if parsing fails
+}
+
 // Middlewares
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  origin: frontendOrigin,
   credentials: true
 }));
 app.use(express.json());

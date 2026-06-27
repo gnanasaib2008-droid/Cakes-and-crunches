@@ -6,10 +6,18 @@ const { initDatabase } = require('./config/db');
 
 const PORT = process.env.PORT || 5000;
 
+// Clean the FRONTEND_URL to make sure it's a valid origin (no trailing slash or path)
+let frontendOrigin = process.env.FRONTEND_URL || 'http://localhost:3000';
+try {
+  frontendOrigin = new URL(frontendOrigin).origin;
+} catch (err) {
+  // Use as-is if parsing fails
+}
+
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+    origin: frontendOrigin,
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
   }
