@@ -95,10 +95,34 @@ const Reports = () => {
     showToast('Generating report PDF document export...', 'success');
   };
 
-  const handleExportCSV = () => {
-    const url = `/api/reports/export/${reportType}?start_date=${startDate}&end_date=${endDate}&sort=${sortField}&order=${sortOrder}`;
-    window.open(url, '_blank');
-    showToast(`Downloading CSV export for ${reportType} report.`, 'success');
+  const handleExportCSV = async () => {
+    try {
+      showToast(`Generating CSV export for ${reportType} report...`, 'info');
+      const response = await api.get(`/api/reports/export/${reportType}`, {
+        params: {
+          start_date: startDate,
+          end_date: endDate,
+          sort: sortField,
+          order: sortOrder
+        },
+        responseType: 'blob'
+      });
+
+      const blob = new Blob([response.data], { type: 'text/csv;charset=utf-8;' });
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `report_${reportType}_${Date.now()}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+      
+      showToast(`CSV report downloaded successfully.`, 'success');
+    } catch (err) {
+      console.error('CSV export failed:', err);
+      showToast('Failed to export CSV report.', 'danger');
+    }
   };
 
   const renderCharts = () => {
